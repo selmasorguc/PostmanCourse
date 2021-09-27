@@ -1,0 +1,373 @@
+{
+	"info": {
+		"_postman_id": "60d81b71-b3fd-48d6-ba0b-23674d406183",
+		"name": "Postman Course",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Section 1",
+			"item": [
+				{
+					"name": "GET request",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "httpbin.org/get"
+					},
+					"response": []
+				},
+				{
+					"name": "GET request with params",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "httpbin.org/get?myparameter=1&myparameter2=2",
+							"host": [
+								"httpbin",
+								"org"
+							],
+							"path": [
+								"get"
+							],
+							"query": [
+								{
+									"key": "myparameter",
+									"value": "1"
+								},
+								{
+									"key": "myparameter2",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST request",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"John\",\r\n    \"email\": \"john@example.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "httpbin.org/post"
+					},
+					"response": []
+				},
+				{
+					"name": "GET Random UUID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let response = pm.response.json();\r",
+									"pm.globals.set(\"uuid\", response.uuid);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "httpbin.org/uuid"
+					},
+					"response": []
+				},
+				{
+					"name": "Global Variables",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\" : \"John\",\r\n    \"email\" : \"john@example.com\"\r\n    \"id\" : \"{{uuid}}\"\r\n}"
+						},
+						"url": "httpbin.org/post"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Section 2",
+			"item": [
+				{
+					"name": "GET request bin",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://requestbin.net/r/9kcqzvkt?foo=bar%20bar",
+							"protocol": "http",
+							"host": [
+								"requestbin",
+								"net"
+							],
+							"path": [
+								"r",
+								"9kcqzvkt"
+							],
+							"query": [
+								{
+									"key": "foo",
+									"value": "bar%20bar"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET with URL encoding",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://requestbin.net/r/9kcqzvkt?foo=bar",
+							"protocol": "http",
+							"host": [
+								"requestbin",
+								"net"
+							],
+							"path": [
+								"r",
+								"9kcqzvkt"
+							],
+							"query": [
+								{
+									"key": "foo",
+									"value": "bar"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Using variables with :",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "httpbin.org/get/users/:userid/contracts/:contractid",
+							"host": [
+								"httpbin",
+								"org"
+							],
+							"path": [
+								"get",
+								"users",
+								":userid",
+								"contracts",
+								":contractid"
+							],
+							"variable": [
+								{
+									"key": "userid",
+									"value": "5"
+								},
+								{
+									"key": "contractid",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Headers",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Do-Not-Track",
+								"value": "1",
+								"type": "text"
+							}
+						],
+						"url": "http://requestbin.net/r/8p9m5dq1"
+					},
+					"response": []
+				},
+				{
+					"name": "Files",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "img",
+									"type": "file",
+									"src": "/C:/Users/selmaso/Desktop/StudentAssets/profile pics/Blake-profile-photo-square.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://requestbin.net/r/8p9m5dq1",
+							"protocol": "http",
+							"host": [
+								"requestbin",
+								"net"
+							],
+							"path": [
+								"r",
+								"8p9m5dq1"
+							],
+							"query": [
+								{
+									"key": "file",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Trello example",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "authority",
+								"value": "trello.com"
+							},
+							{
+								"key": "pragma",
+								"value": "no-cache"
+							},
+							{
+								"key": "cache-control",
+								"value": "no-cache"
+							},
+							{
+								"key": "sec-ch-ua",
+								"value": "\"Google Chrome\";v=\"93\", \" Not;A Brand\";v=\"99\", \"Chromium\";v=\"93\""
+							},
+							{
+								"key": "x-trello-client-version",
+								"value": "build-8890"
+							},
+							{
+								"key": "x-trello-traceid",
+								"value": "6151991a7f4cb16faa916ed567053967"
+							},
+							{
+								"key": "sec-ch-ua-mobile",
+								"value": "?0"
+							},
+							{
+								"key": "user-agent",
+								"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.82 Safari/537.36"
+							},
+							{
+								"key": "content-type",
+								"value": "application/json"
+							},
+							{
+								"key": "accept",
+								"value": "application/json, text/javascript, */*; q=0.01"
+							},
+							{
+								"key": "x-requested-with",
+								"value": "XMLHttpRequest"
+							},
+							{
+								"key": "sec-ch-ua-platform",
+								"value": "\"Windows\""
+							},
+							{
+								"key": "origin",
+								"value": "https://trello.com"
+							},
+							{
+								"key": "sec-fetch-site",
+								"value": "same-origin"
+							},
+							{
+								"key": "sec-fetch-mode",
+								"value": "cors"
+							},
+							{
+								"key": "sec-fetch-dest",
+								"value": "empty"
+							},
+							{
+								"key": "referer",
+								"value": "https://trello.com/b/bX1QdQ5Z/postman-course"
+							},
+							{
+								"key": "accept-language",
+								"value": "en-US,en;q=0.9"
+							},
+							{
+								"key": "cookie",
+								"value": "dsc=a0fa1f35676f9b5a79d4b6b385bc13f53b1ded7756d5e366b49dd7baeaa1199b; lang=en; gdpr-cookie-consent=accepted; landing=New%20Landing; ajs_anonymous_id=%22b296efd1-a2b9-4521-b02b-4900fcc10a63%22; ajs_group_id=null; _ga=GA1.2.1130192793.1632737162; _gid=GA1.2.1347475818.1632737162; _sp_ses.dc4d=*; _gcl_au=1.1.1870227533.1632737162; _biz_sid=57def0; _mkto_trk=id:594-ATC-127&token:_mch-trello.com-1632737162607-93280; _biz_uid=345e9aeab2e74afaeaf505f1679b0867; _biz_nA=2; _biz_flagsA=%7B%22Version%22%3A1%2C%22ViewThrough%22%3A%221%22%2C%22XDomain%22%3A%221%22%7D; _biz_pendingA=%5B%5D; _cs_c=1; _cs_id=1c96905a-da13-a3f7-9af5-1b5e1c0cc6c0.1632737223.1.1632737223.1632737223.1.1666901223034; _cs_s=1.1.0.1632739023035; _CT_RS_=Recording; WRUIDAWS=3484333685506520; __CT_Data=gpv=1&ckp=tld&dm=trello.com&apv_45_www33=1&cpv_45_www33=1&rpv_45_www33=1; __cid=xMCEQblc8URChkJ8QGu41wZjtONzA76WGJdYiwiWTds8EFOI25XLpgOjW7UW0auPVJKgRIr5BIgDa687RJpT9H_kHuRh_z_nerlmpSu2e9xy-DfkbOVzxU-2Yrs1pmirTP89vS-tc_MtonqrWuYj537BNulQ_yekLqVkpSigc6NQ3gfGV7pz53L9Nqtc8zDgdL9zyHPkPOZ-uWq4NaZ9vy6hZKUjpHPYevAy-XK5ZrgsuGC9d55gvS2uY-0uriSIHB1THxOkNeh-8mayeAoAylXRH847vhrlb_M_pzvfPf9--nvZMrYGw1-2FPl65jvieOVzz3LkNuhvpRe6KrYl-ESjDLs75iDULsljpzvSYM8qp365LLhhuzWnY7s1r2S_Ir_3nyq5YqQqr2S7N7ZisSumabsrthLGtJ5TPjpT5Q3QloCKxhUFbBt9UHxRMZCbJWlRw9uWU4sbllOLG5ZTixuWU4sbllOLG5ZTixuWE4tb1lOLG5YTy1vWE8sbllOLG5YTy1vWU4tbCVOKG5ZTixuWUovk; token=615197eebcd0336eeab650a3%2FBZfBDuS2ryOkE1QgSVCq9aiKdl5GejtqS8hA4kzpvHA0G8PhChvFfdRf8SZznvnr; hasAccount=atlassian; loggedIn=1; preAuthProps=s%3A615197eebcd0336eeab650a3%3AisEnterpriseAdmin%3Dfalse.jlEzCraKaVfARz7caNC%2Bo0QM1Kz6mX4uTDqKHdqDp2o; G_ENABLED_IDPS=google; BP_GTM_FPC=d729cec6-4ca9-4d23-b07b-3896d4c9f635; _uetsid=8512cce01f7a11ec98c54588678511ba; _uetvid=8512d0f01f7a11ecadd36db30c3ae27d; _sp_id.dc4d=73485a61-0bea-4590-9987-3a52cc94cc82.1632737162.1.1632737544.1632737162.0aa07f76-21fa-47c2-a2d6-ca919fb5084c"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"name\":\"New card\",\"closed\":false,\"idLabels\":[],\"idMembers\":[],\"dateLastActivity\":1632737562602,\"pos\":196607,\"cardRole\":null,\"idBoard\":\"61519831247bc5227e5b21c8\",\"idList\":\"61519831247bc5227e5b21ca\",\"token\":\"615197eebcd0336eeab650a3/BZfBDuS2ryOkE1QgSVCq9aiKdl5GejtqS8hA4kzpvHA0G8PhChvFfdRf8SZznvnr\"}"
+						},
+						"url": "https://trello.com/1/cards"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Section 3",
+			"item": [
+				{
+					"name": "Test 1",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": null
+					},
+					"response": []
+				},
+				{
+					"name": "Trello API add board",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": null
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
